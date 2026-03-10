@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE FRONTIER HIHARA | ザ・フロンティア日原 公式サイト</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    colors: {
+                        frontier: {
+                            navy: '#1a2a3a',
+                            gold: '#b8945c',
+                            slate: '#f4f7f9',
+                            text: '#333333',
+                            border: '#e2e8f0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { color: #333; line-height: 1.7; }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1.5px;
+            background-color: #b8945c;
+            transition: width 0.8s ease 0.2s;
+        }
+        .section-title.line-on::after { width: 30px; }
+
+        .floor-row {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            align-items: center;
+            border-bottom: 1px solid #edf2f7;
+            padding: 1rem 1.5rem;
+            opacity: 0;
+            transform: translateX(-12px);
+            transition: background-color 0.2s, opacity 0.4s ease, transform 0.4s ease;
+        }
+        .floor-row.fx-in { opacity: 1; transform: translateX(0); }
+        .floor-row:hover { background-color: #f8fafc; }
+
+        .floor-num {
+            font-family: 'Times New Roman', serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #1a2a3a;
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .cat-obs  { border-left: 4px solid #b8945c; }
+        .cat-off  { border-left: 4px solid #94a3b8; }
+        .cat-shop { border-left: 4px solid #3b82f6; }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(26,42,58,0.4), rgba(26,42,58,0.8));
+        }
+
+        @keyframes heroZoom {
+            from { transform: scale(1.07); }
+            to   { transform: scale(1.0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-bg-img { animation: heroZoom 9s ease-out forwards; }
+        .hero-title  { animation: fadeUp 1s ease-out 0.3s both; }
+        .hero-sub    { animation: fadeUp 1s ease-out 0.7s both; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+
+        nav a { position: relative; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -4px;
+            width: 0; height: 1.5px;
+            background: #b8945c;
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after, nav a.nav-active::after { width: 100%; }
+        nav a.nav-active { color: #b8945c !important; }
+    </style>
+</head>
+<body class="font-sans bg-white">
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 bg-white/95 border-b border-gray-100 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <div class="flex flex-col cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-serif text-xl md:text-2xl font-bold tracking-tighter text-frontier-navy leading-none uppercase">The Frontier</span>
+                    <span class="text-[9px] tracking-[0.4em] text-frontier-gold font-bold ml-0.5 uppercase">Hihara</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-[13px] font-medium tracking-widest text-frontier-navy">
+                    <a href="#concept" class="hover:text-frontier-gold transition">CONCEPT</a>
+                    <a href="#floor-guide" class="hover:text-frontier-gold transition">FLOOR GUIDE</a>
+                    <a href="#access" class="hover:text-frontier-gold transition">ACCESS</a>
+                    <a href="foodcourt.html" class="hover:text-frontier-gold transition">FOODCOURT</a>                    
+                </div>
+                <div class="md:hidden">
+                    <svg class="w-6 h-6 text-frontier-navy" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="3" y1="6"  x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-frontier-navy">
+            <img src=""
+                 alt="The Frontier Hihara Exterior"
+                 class="hero-bg-img w-full h-full object-cover opacity-50">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="relative text-center text-white px-4">
+            <h1 class="hero-title text-3xl md:text-5xl font-bold mb-4 font-serif tracking-widest">THE FRONTIER HIHARA</h1>
+            <p class="hero-sub text-sm md:text-base font-light tracking-[0.3em] opacity-90">日原市北区中縄町、地上120mの複合ランドマーク</p>
+        </div>
+    </section>
+
+    <main>
+        <!-- Concept -->
+        <section id="concept" class="py-20 bg-white">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-8">コンセプト</h2>
+                <p class="reveal text-sm md:text-base leading-loose text-gray-600" style="transition-delay:0.15s">
+                    「THE FRONTIER HIHARA」は、日原の新しい中心として、<br class="hidden md:block">
+                    ビジネス、エンターテインメント、そして日常の利便性が調和する場所を目指しています。<br>
+                    地上30階に広がる多様な施設が、訪れるすべての人に新しい価値を提供します。
+                </p>
+            </div>
+        </section>
+
+        <!-- Floor Guide -->
+        <section id="floor-guide" class="py-20 bg-frontier-slate">
+            <div class="max-w-4xl mx-auto px-4 md:px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-4">フロアガイド</h2>
+                    <p class="reveal text-[11px] text-gray-400 tracking-widest uppercase italic" style="transition-delay:0.1s">Floor Directory</p>
+                </div>
+
+                <div class="reveal bg-white shadow-sm border border-frontier-border rounded-lg overflow-hidden" style="transition-delay:0.2s">
+                    <div class="flex gap-6 px-6 py-3 bg-gray-50 border-b border-frontier-border text-[10px] font-bold text-gray-500 tracking-wider">
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-frontier-gold rounded-full"></span> 展望施設</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-gray-400 rounded-full"></span> オフィス</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-blue-500 rounded-full"></span> ショップ＆エンターテインメント</div>
+                    </div>
+
+                    <div id="floor-list" class="bg-white">
+                        <div class="floor-row cat-obs">
+                            <div class="floor-num italic">30F</div>
+                            <div class="pl-6 font-bold text-frontier-navy">展望フロア</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-200">29F</div>
+                            <div class="pl-6 text-gray-300 italic">準備中</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-200">28F</div>
+                            <div class="pl-6 text-gray-300 italic">準備中</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-200">27F</div>
+                            <div class="pl-6 text-gray-300 italic">準備中</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">26F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ユニオンエンターテイメント日原支社</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">25F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ユニオンエンターテイメント日原支社</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">24F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ユニオンエンターテイメント日原支社</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-400">23F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ウェルシング株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-400">22F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ウェルシング株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-400">21F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">NANAMINE CINEMA株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">20F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">秋霜電気販売株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">19F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">秋霜電気販売株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off bg-gray-50/30">
+                            <div class="floor-num italic text-gray-400">18F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">秋霜電気販売株式会社</div>
+                        </div>
+                        <div class="floor-row cat-off">
+                            <div class="floor-num italic text-gray-400">17F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">日原開発鉄道株式会社</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">16F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">NANAMINE CINEMA</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">15F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">NANAMINE CINEMA</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">14F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">フードコート</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">13F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ユニオンスタジアム　ザ・フロンティア日原</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">12F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">七浜国有鉄道　きっぷうりば</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">11F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">七浜国有鉄道　鉄道ひろば</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">10F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">豆福書店</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">9F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">網張電工<br>快鉄ストア</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">8F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">網張電工</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">7F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">タケマルカメラ日原フロンティア店</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">6F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">タケマルカメラ日原フロンティア店</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">5F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">タケマルカメラ日原フロンティア店</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">4F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">日原銀行フロンティア支店</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">3F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">岩城航空機 City Showroom &amp; Brand Space</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">2F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">FUNMOBILE・WellThing</div>
+                        </div>
+                        <div class="floor-row cat-shop">
+                            <div class="floor-num italic text-blue-500">1F</div>
+                            <div class="pl-6 text-frontier-navy font-medium">ピララ日原フロンティア店<br>(日原銀行・七星銀行ATMコーナー)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Access -->
+        <section id="access" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-4">アクセス</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-6 reveal" style="transition-delay:0.1s">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 flex-shrink-0 mt-1" style="color:#b8945c" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                <circle cx="12" cy="9" r="2.5"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-sm mb-1 uppercase tracking-wider text-frontier-navy">住所</p>
+                                <p class="text-gray-600 text-sm">日原県日原市北区中縄町</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 flex-shrink-0 mt-1" style="color:#b8945c" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <rect x="4" y="3" width="16" height="14" rx="3"/>
+                                <path d="M4 11h16M8 19l-2 2M16 19l2 2M12 17v2"/>
+                                <circle cx="8.5" cy="14.5" r="1"/>
+                                <circle cx="15.5" cy="14.5" r="1"/>
+                            </svg>
+                            <div>
+                                <p class="font-bold text-sm mb-1 uppercase tracking-wider text-frontier-navy">公共交通によるアクセス</p>
+                                <p class="text-gray-600 text-sm">「日原駅」北口より徒歩3分<br>(国鉄・日原鉄道・あざみない鉄道・地下鉄)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 展望フロア料金 -->
+        <section class="py-20 bg-white border-t border-gray-100">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-4">展望フロア料金</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="space-y-6 reveal" style="transition-delay:0.1s">
+                        <div>
+                            <p class="font-bold text-sm mb-1 uppercase tracking-wider text-frontier-navy">大人</p>
+                            <p class="text-gray-600 text-sm">200円</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm mb-1 uppercase tracking-wider text-frontier-navy">子供</p>
+                            <p class="text-gray-600 text-sm">100円</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-frontier-navy py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <div class="mb-6 text-center">
+                <p class="font-serif text-white text-xl font-bold tracking-widest uppercase">The Frontier Hihara</p>
+            </div>
+            <p class="text-[9px] text-gray-500 tracking-wider">&copy; 2026 THE FRONTIER HIHARA. All Rights Reserved.</p>
+            <p class="text-[9px] text-gray-500 tracking-wider">このサイトに出てくる地名・社名などはすべてフィクションです。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        var revealObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('vis');
+                    if (e.target.classList.contains('section-title')) {
+                        e.target.classList.add('line-on');
+                    }
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+        // Floor rows staggered
+        var floorObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    var rows = e.target.querySelectorAll('.floor-row');
+                    rows.forEach(function(row, i) {
+                        setTimeout(function() { row.classList.add('fx-in'); }, i * 35);
+                    });
+                    floorObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05 });
+        var fl = document.getElementById('floor-list');
+        if (fl) floorObs.observe(fl);
+
+        // Active nav
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('nav a[href^="#"]');
+        var navObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    navLinks.forEach(function(a) {
+                        a.classList.toggle('nav-active', a.getAttribute('href') === '#' + e.target.id);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(function(s) { navObs.observe(s); });
+    </script>
+</body>
+</html>

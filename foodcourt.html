@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14F フードコート | THE FRONTIER HIHARA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    colors: {
+                        frontier: {
+                            navy: '#1a2a3a',
+                            gold: '#b8945c',
+                            slate: '#f4f7f9',
+                            text: '#333333',
+                            border: '#e2e8f0',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { color: #333; line-height: 1.7; }
+
+        .section-title {
+            font-family: 'Noto Serif JP', serif;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1.5px;
+            background-color: #b8945c;
+            transition: width 0.8s ease 0.2s;
+        }
+        .section-title.line-on::after { width: 30px; }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(26,42,58,0.35), rgba(26,42,58,0.75));
+        }
+
+        @keyframes heroZoom {
+            from { transform: scale(1.07); }
+            to   { transform: scale(1.0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-bg-img { animation: heroZoom 9s ease-out forwards; }
+        .hero-title  { animation: fadeUp 1s ease-out 0.3s both; }
+        .hero-sub    { animation: fadeUp 1s ease-out 0.7s both; }
+        .hero-badge  { animation: fadeUp 1s ease-out 1.0s both; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.vis { opacity: 1; transform: translateY(0); }
+
+        nav a { position: relative; }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -4px;
+            width: 0; height: 1.5px;
+            background: #b8945c;
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* Shop cards */
+        .shop-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+        }
+        .shop-card.fx-in { opacity: 1; transform: translateY(0); }
+        .shop-card:hover { box-shadow: 0 8px 30px rgba(26,42,58,0.1); }
+
+        .genre-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            padding: 2px 10px;
+            border-radius: 2px;
+        }
+
+        .floor-badge {
+            font-family: 'Times New Roman', serif;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: #b8945c;
+            border: 1px solid #b8945c;
+            padding: 3px 10px;
+            display: inline-block;
+        }
+
+        .info-grid dt {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1a2a3a;
+        }
+        .info-grid dd {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Divider ornament */
+        .ornament {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #b8945c;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+        }
+        .ornament::before, .ornament::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #b8945c55);
+        }
+        .ornament::after {
+            background: linear-gradient(to left, transparent, #b8945c55);
+        }
+    </style>
+</head>
+<body class="font-sans bg-white">
+
+    <!-- Header -->
+    <nav class="fixed w-full z-50 bg-white/95 border-b border-gray-100 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <a href="index.html" class="flex flex-col cursor-pointer">
+                    <span class="font-serif text-xl md:text-2xl font-bold tracking-tighter text-frontier-navy leading-none uppercase">The Frontier</span>
+                    <span class="text-[9px] tracking-[0.4em] text-frontier-gold font-bold ml-0.5 uppercase">Hihara</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8 text-[13px] font-medium tracking-widest text-frontier-navy">
+                    <a href="index.html#floor-guide" class="hover:text-frontier-gold transition">FLOOR GUIDE</a>
+                    <span class="text-frontier-gold text-[11px] tracking-widest border border-frontier-gold px-3 py-1">14F FOOD COURT</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative h-[55vh] md:h-[62vh] flex items-end justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-frontier-navy">
+            <img src="" alt="フードコート" class="hero-bg-img w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="relative w-full max-w-4xl mx-auto px-6 pb-16 text-white">
+            <div class="hero-badge mb-4">
+                <span class="floor-badge" style="border-color:rgba(255,255,255,0.5); color:rgba(255,255,255,0.8)">14F</span>
+            </div>
+            <h1 class="hero-title text-3xl md:text-5xl font-bold mb-3 font-serif tracking-widest">FOOD COURT</h1>
+            <p class="hero-sub text-sm md:text-base font-light tracking-[0.25em] opacity-80">フードコート　― 日原の空で、味わう時間</p>
+        </div>
+    </section>
+
+    <main>
+
+        <!-- Intro -->
+        <section class="py-16 bg-white">
+            <div class="max-w-2xl mx-auto px-6 text-center">
+                <p class="ornament reveal mb-10">FOOD COURT 14F</p>
+                <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-8">概要</h2>
+                <p class="reveal text-sm md:text-base leading-loose text-gray-600" style="transition-delay:0.1s">
+                    14階フードコートは、多彩なジャンルの飲食店が集まる、<br class="hidden md:block">
+                    THE FRONTIER HIHARAの食の拠点です。<br>
+                    広々としたフロアでゆっくりとお食事をお楽しみいただけます。
+                </p>
+            </div>
+        </section>
+
+        <!-- Floor Info -->
+        <section class="py-12 bg-frontier-slate border-y border-frontier-border">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="bg-white px-4 py-6 border border-frontier-border">
+                        <p class="text-[10px] font-bold tracking-widest text-frontier-gold mb-2 uppercase">Floor</p>
+                        <p class="font-serif text-3xl font-bold text-frontier-navy">14F</p>
+                    </div>
+                    <div class="bg-white px-4 py-6 border border-frontier-border">
+                        <p class="text-[10px] font-bold tracking-widest text-frontier-gold mb-2 uppercase">Shops</p>
+                        <p class="font-serif text-3xl font-bold text-frontier-navy">2</p>
+                        <p class="text-[11px] text-gray-400 mt-1">店舗</p>
+                    </div>
+                    <div class="bg-white px-4 py-6 border border-frontier-border">
+                        <p class="text-[10px] font-bold tracking-widest text-frontier-gold mb-2 uppercase">Open</p>
+                        <p class="text-sm font-bold text-frontier-navy leading-tight mt-1">11:00<br><span class="text-gray-300 font-light">—</span><br>22:00</p>
+                    </div>
+                    <div class="bg-white px-4 py-6 border border-frontier-border">
+                        <p class="text-[10px] font-bold tracking-widest text-frontier-gold mb-2 uppercase">Seats</p>
+                        <p class="font-serif text-3xl font-bold text-frontier-navy">320</p>
+                        <p class="text-[11px] text-gray-400 mt-1">席</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop List -->
+        <section class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="text-center mb-14">
+                    <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-4">出店一覧</h2>
+                    <p class="reveal text-[11px] text-gray-400 tracking-widest uppercase italic" style="transition-delay:0.1s">Tenant List</p>
+                </div>
+
+                <div id="shop-grid" class="grid md:grid-cols-2 gap-5">
+
+                    <!-- Shop 1 -->
+                    <div class="shop-card bg-white border border-frontier-border p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-frontier-navy text-base">サンバーガー</h3>
+                            <span class="genre-tag bg-amber-50 text-amber-700 border border-amber-200">ファストフード</span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed">ランチから軽食まで幅広く利用できる美味しいハンバーガー</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <p class="text-[11px] text-gray-400">10:00 – 22:00</p>
+                        </div>
+                    </div>
+
+                    <!-- Shop 2 -->
+                    <div class="shop-card bg-white border border-frontier-border p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="font-bold text-frontier-navy text-base">七峰家</h3>
+                            <span class="genre-tag bg-red-50 text-red-700 border border-red-200">中華</span>
+                        </div>
+                        <p class="text-xs text-gray-500 leading-relaxed">こだわりの濃厚スープと硬めの麺がクセになる本格派家系ラーメン</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <p class="text-[11px] text-gray-400">10:00 – 22:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facility Info -->
+        <section class="py-16 bg-frontier-slate border-t border-frontier-border">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="section-title reveal text-2xl font-bold text-frontier-navy mb-4">施設情報</h2>
+                </div>
+                <div class="reveal grid md:grid-cols-2 gap-10 bg-white border border-frontier-border p-8 md:p-10">
+                    <dl class="info-grid">
+                        <dt>営業時間</dt>
+                        <dd>10:00 – 22:00<br><span class="text-xs text-gray-400">※店舗により異なります</span></dd>
+                        <dt>席数</dt>
+                        <dd>約320席（テーブル席・カウンター席）</dd>
+                    </dl>
+                    <dl class="info-grid">
+                        <dt>アクセス</dt>
+                        <dd>エレベーターにて14階へ</dd>
+                        <dt>お支払い</dt>
+                        <dd>現金・各種クレジットカード<br>電子マネー対応（店舗により異なる）</dd>
+                        <dt>お問い合わせ</dt>
+                        <dd>THE FRONTIER HIHARA<br>総合インフォメーション</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- Back link -->
+        <section class="py-14 bg-white text-center">
+            <a href="index.html#floor-guide"
+               class="reveal inline-flex items-center gap-3 text-[12px] font-bold tracking-widest text-frontier-navy border border-frontier-navy px-8 py-3 hover:bg-frontier-navy hover:text-white transition-colors duration-300 uppercase">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+                </svg>
+                フロアガイドへ戻る
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-frontier-navy py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <div class="mb-6 text-center">
+                <p class="font-serif text-white text-xl font-bold tracking-widest uppercase">The Frontier Hihara</p>
+                <p class="text-[10px] text-frontier-gold tracking-[0.3em] mt-1 uppercase">14F Food Court</p>
+            </div>
+            <p class="text-[9px] text-gray-500 tracking-wider">&copy; 2026 THE FRONTIER HIHARA. All Rights Reserved.</p>
+            <p class="text-[9px] text-gray-500 tracking-wider">このサイトに出てくる地名・社名などはすべてフィクションです。</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        var revealObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('vis');
+                    if (e.target.classList.contains('section-title')) {
+                        e.target.classList.add('line-on');
+                    }
+                }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+        // Shop cards staggered
+        var shopObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    var cards = e.target.querySelectorAll('.shop-card');
+                    cards.forEach(function(card, i) {
+                        setTimeout(function() { card.classList.add('fx-in'); }, i * 60);
+                    });
+                    shopObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.05 });
+        var sg = document.getElementById('shop-grid');
+        if (sg) shopObs.observe(sg);
+    </script>
+</body>
+</html>
